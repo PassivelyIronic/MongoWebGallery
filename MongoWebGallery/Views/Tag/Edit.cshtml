@@ -1,0 +1,19 @@
+﻿@model MongoWebGallery.Models.Tag
+
+<div class="container my-5">
+    <div class="bg-dark bg-opacity-75 p-4 rounded shadow">
+        <h2 class="text-white mb-4">Edytuj tag</h2>
+        <form asp-action="Edit" class="shadow-lg p-4 bg-light rounded mx-auto" style="max-width: 600px;">
+            <div class="form-group mb-3">
+                <label asp-for="Name" class="form-label">Nazwa</label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id" />
+            <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-primary">Zapisz</button>
+                <a asp-action="Index" class="btn btn-secondary">Anuluj</a>
+            </div>
+        </form>
+    </div>
+</div>

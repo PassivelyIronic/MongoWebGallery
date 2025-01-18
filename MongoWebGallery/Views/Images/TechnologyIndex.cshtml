@@ -1,0 +1,21 @@
+﻿@model MongoWebGallery.Models.TechnologyImagesViewModel
+
+<div class="container image-container">
+    <h2>Obrazy wykorzystujące technologię: @Model.Technology.Name</h2>
+
+    <div class="gallery-grid">
+        @foreach (var image in Model.Images)
+        {
+            <div class="gallery-item">
+                <a href="@Url.Action("Details", "Image", new { id = image.Id.ToString() })">
+                    <img src="data:image/png;base64,@image.Base64Image" alt="@image.Name" />
+                </a>
+            </div>
+        }
+    </div>
+
+    @if (!Model.Images.Any())
+    {
+        <p>Brak obrazów wykorzystujących tę technologię.</p>
+    }
+</div>

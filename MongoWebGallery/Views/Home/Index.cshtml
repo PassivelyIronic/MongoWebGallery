@@ -1,0 +1,53 @@
+﻿@model IEnumerable<MongoWebGallery.Models.Image>
+
+@{
+    ViewData["Title"] = "Home";
+}
+
+<div class="container mb-4 image-container">
+    <h2 class="text-center">
+        <a href="@Url.Action("Index", "Images", new { sort = "date" })" style="text-decoration: none; color: inherit;">Najnowsze zdjęcia</a>
+    </h2>
+    <div class="gallery-grid">
+        @foreach (var image in Model.OrderByDescending(i => i.CreatedDate).Take(5))
+        {
+            <div class="gallery-item">
+                <a href="@Url.Action("Details", "Image", new { id = image.Id })">
+                    <img src="data:image/png;base64,@image.Base64Image" alt="@image.Name" />
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container mb-4 image-container">
+    <h2 class="text-center">
+        <a href="@Url.Action("Index", "Images", new { sort = "views" })" style="text-decoration: none; color: inherit;">Najpopularniejsze zdjęcia</a>
+    </h2>
+    <div class="gallery-grid">
+        @foreach (var viewedImage in ViewBag.MostViewedImages as List<Image>)
+        {
+            <div class="gallery-item">
+                <a href="@Url.Action("Details", "Image", new { id = viewedImage.Id.ToString() })">
+                    <img src="data:image/png;base64,@viewedImage.Base64Image" alt="@viewedImage.Name" />
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+<div class="container mb-4 image-container">
+    <h2 class="text-center">
+        <a href="@Url.Action("Index", "Images", new { sort = "rating" })" style="text-decoration: none; color: inherit;">Najwyżej oceniane zdjęcia</a>
+    </h2>
+    <div class="gallery-grid">
+        @foreach (var topImage in ViewBag.TopRatedImages as List<Image>)
+        {
+            <div class="gallery-item">
+                <a href="@Url.Action("Details", "Image", new { id = topImage.Id.ToString() })">
+                    <img src="data:image/png;base64,@topImage.Base64Image" alt="@topImage.Name" />
+                </a>
+            </div>
+        }
+    </div>
+</div>
